@@ -1,0 +1,4 @@
+As a customer,
+I should be able to log in
+using my email and password
+so that I can access my dashboard.
