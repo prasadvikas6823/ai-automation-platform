@@ -15,6 +15,8 @@ interface AITestCase {
 export class ResponseParser{
 
     parse(response: string): TestCase[]{
+        console.log(response);
+
         const parsedResponse: AIResponse = JSON.parse(response);
 
         return parsedResponse.testCases.map((testCase) => {

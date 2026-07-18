@@ -13,11 +13,11 @@ async function main(){
 
     const responseParser = new ResponseParser();
 
-    const generateTestCaseUseCase = new GenerateTestCasesUseCase(requirementReader,promptBuilder,llmService,responseParser);
+    const generateTestCasesUseCase = new GenerateTestCasesUseCase(requirementReader,promptBuilder,llmService,responseParser);
 
-    const testCases = await generateTestCaseUseCase.execute();
+    const testCases = await generateTestCasesUseCase.execute();
 
-    console.log(testCases);
+    console.log(JSON.stringify(testCases, null, 2));
     
 }
 
