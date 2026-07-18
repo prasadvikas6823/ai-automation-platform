@@ -1,9 +1,9 @@
-import { Step } from "../../domain/models/Step";
+import { Step } from "./Step";
 
 export class TestCase{
     constructor(
-        private readonly title: string,
-        private readonly steps: Step[],
-        private readonly expectedResult: string
+        public readonly title: string,
+        public readonly steps: Step[],
+        public readonly expectedResult: string
     ){}
 }
