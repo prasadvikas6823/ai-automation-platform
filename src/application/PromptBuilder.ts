@@ -8,7 +8,7 @@ export class PromptBuilder {
     let template = await readFile(this.templatePath, "utf-8");
 
     template = template.replace("{{requirement}}", requirement.description);
-    template = template.replace("{{testCaseCount}}", "10");
+    template = template.replace("{{testCaseCount}}", "2");
 
     return template;
   }

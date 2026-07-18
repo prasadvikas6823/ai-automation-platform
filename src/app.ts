@@ -1,16 +1,24 @@
 import { TextFileRequirementReader } from "./infrastructure/readers/TextFileRequirementReader"
 import { PromptBuilder } from "./application/PromptBuilder"; 
+import { OllamaService } from "./infrastructure/llm/OllamaService";
+import { ResponseParser } from "./infrastructure/parser/ResponseParser";
+import { GenerateTestCasesUseCase } from "./application/usecases/GenerateTestCasesUseCase";
 
 async function main(){
-    const reader = new TextFileRequirementReader("requirements/login.txt");
-
-    const requirement = await reader.read();
+    const requirementReader = new TextFileRequirementReader("requirements/login.txt");
 
     const promptBuilder = new PromptBuilder("src/prompts/GenerateTestCases.prompt");
 
-    const prompt = await promptBuilder.build(requirement);
+    const llmService = new OllamaService("http://localhost:11434","llama3.2");
 
-    console.log(prompt);
+    const responseParser = new ResponseParser();
+
+    const generateTestCasesUseCase = new GenerateTestCasesUseCase(requirementReader,promptBuilder,llmService,responseParser);
+
+    const testCases = await generateTestCasesUseCase.execute();
+
+    console.log(JSON.stringify(testCases, null, 2));
+    
 }
 
 main().catch((error) =>{
