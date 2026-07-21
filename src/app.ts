@@ -3,6 +3,7 @@ import { PromptBuilder } from "./application/PromptBuilder";
 import { OllamaService } from "./infrastructure/llm/OllamaService";
 import { ResponseParser } from "./infrastructure/parser/ResponseParser";
 import { GenerateTestCasesUseCase } from "./application/usecases/GenerateTestCasesUseCase";
+import { PlaywrightGenerator } from "./infrastructure/generators/PlaywrightGenerator";
 
 async function main(){
     const requirementReader = new TextFileRequirementReader("requirements/login.txt");
@@ -18,6 +19,9 @@ async function main(){
     const testCases = await generateTestCasesUseCase.execute();
 
     console.log(JSON.stringify(testCases, null, 2));
+
+    const playwrightGenerator = new PlaywrightGenerator();
+    console.log(playwrightGenerator.generate(testCases));
     
 }
 
